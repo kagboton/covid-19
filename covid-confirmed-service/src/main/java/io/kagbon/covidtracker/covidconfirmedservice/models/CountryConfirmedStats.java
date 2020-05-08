@@ -1,22 +1,23 @@
 package io.kagbon.covidtracker.covidconfirmedservice.models;
 
-public class CountryConfirmedStats {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-    private String country;
+@Entity
+public class CountryConfirmedStats implements Serializable {
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
+
+    @Id
     private String slug;
+    private String country;
     private int confirmedTotalCases;
     private int confirmedNewCases;
 
 
     public CountryConfirmedStats() {
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getSlug() {
@@ -25,6 +26,14 @@ public class CountryConfirmedStats {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public int getConfirmedTotalCases() {
