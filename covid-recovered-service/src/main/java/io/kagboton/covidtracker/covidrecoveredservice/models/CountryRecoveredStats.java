@@ -1,21 +1,22 @@
 package io.kagboton.covidtracker.covidrecoveredservice.models;
 
-public class CountryRecoveredStats {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-    String country;
+@Entity
+public class CountryRecoveredStats implements Serializable {
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
+
+    @Id
     private String slug;
-    int totalRecovered;
-    int newRecovered;
+    private String country;
+    private int totalRecovered;
+    private int newRecovered;
 
     public CountryRecoveredStats() {
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getSlug() {
@@ -24,6 +25,14 @@ public class CountryRecoveredStats {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public int getTotalRecovered() {
