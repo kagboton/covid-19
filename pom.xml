@@ -27,8 +27,6 @@
         <module>covid-recovered-service</module>
         <module>covid-global-service</module>
         <module>discovery-server</module>
-
-
     </modules>
 
     <build>
