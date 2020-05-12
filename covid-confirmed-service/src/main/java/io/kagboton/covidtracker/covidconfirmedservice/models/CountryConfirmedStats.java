@@ -1,4 +1,4 @@
-package io.kagbon.covidtracker.covidconfirmedservice.models;
+package io.kagboton.covidtracker.covidconfirmedservice.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,6 +1,6 @@
-package io.kagbon.covidtracker.covidconfirmedservice;
+package io.kagboton.covidtracker.covidconfirmedservice;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

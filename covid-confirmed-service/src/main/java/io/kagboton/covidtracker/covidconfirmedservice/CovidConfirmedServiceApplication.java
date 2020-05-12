@@ -1,4 +1,4 @@
-package io.kagbon.covidtracker.covidconfirmedservice;
+package io.kagboton.covidtracker.covidconfirmedservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

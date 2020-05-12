@@ -1,4 +1,4 @@
-package io.kagbon.covidtracker.covidconfirmedservice.models;
+package io.kagboton.covidtracker.covidconfirmedservice.models;
 
 import java.util.List;
 

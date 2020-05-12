@@ -8,7 +8,7 @@
         <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>io.kagbon.covidtracker</groupId>
+    <groupId>io.kagboton.covidtracker</groupId>
     <artifactId>covid-confirmed-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>covid-confirmed-service</name>
@@ -55,9 +55,18 @@
         </dependency>
 
         <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.16.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <version>2.1.6.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.junit.vintage</groupId>

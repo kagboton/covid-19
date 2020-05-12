@@ -1,9 +1,9 @@
-package io.kagbon.covidtracker.covidconfirmedservice.services;
+package io.kagboton.covidtracker.covidconfirmedservice.services;
 
-import io.kagbon.covidtracker.covidconfirmedservice.models.Country;
-import io.kagbon.covidtracker.covidconfirmedservice.models.CountryConfirmedStats;
-import io.kagbon.covidtracker.covidconfirmedservice.repository.CountryConfirmedStatsRepository;
-import io.kagbon.covidtracker.covidconfirmedservice.services.exception.CountryNotFoundException;
+import io.kagboton.covidtracker.covidconfirmedservice.models.Country;
+import io.kagboton.covidtracker.covidconfirmedservice.models.CountryConfirmedStats;
+import io.kagboton.covidtracker.covidconfirmedservice.repository.ConfirmedStatsRepository;
+import io.kagboton.covidtracker.covidconfirmedservice.services.exception.CountryNotFoundException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.json.JSONArray;
@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
@@ -26,7 +27,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CovidConfirmedDataService implements ICovidConfirmedDataService {
+public class ConfirmedStatsService implements IConfirmedStatsService {
+
 
     private static String CONFIRMED_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 
@@ -36,10 +38,14 @@ public class CovidConfirmedDataService implements ICovidConfirmedDataService {
     private RestTemplate restTemplate;
 
     @Autowired
-    private CountryConfirmedStatsRepository repository;
+    private ConfirmedStatsRepository repository;
 
-    @Override
-    public List<Country> getAllWorldCountries() {
+
+     /**
+     * Get all the world countries and their slug from external api
+     * @return a list of countries
+     */
+    private List<Country> getAllWorldCountries() {
 
         List<Country> allCountries = new ArrayList<>();
 
@@ -63,12 +69,19 @@ public class CovidConfirmedDataService implements ICovidConfirmedDataService {
 
         Collections.sort(allCountries, Country.countryComparator); //sort countries by name in ascending order
 
+        //todo save countries in file
+
         return allCountries;
 
     }
 
-    @Override
-    public List<CountryConfirmedStats> fetchDataAndConstructTempCountryConfirmedStats() throws IOException, InterruptedException {
+    /**
+     * Fetch data from external source (CSV file on github), parse them to custom object and aggregate data in temporary object
+     * @return a list of covid-19 confirmed cases per country and states
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    private List<CountryConfirmedStats> fetchDataAndConstructTempCountryConfirmedStats() throws IOException, InterruptedException {
 
         List<CountryConfirmedStats> tempCountryConfirmedStatsList = new ArrayList<>(); //Temporary country confirmed stats list before update
 
@@ -125,19 +138,7 @@ public class CovidConfirmedDataService implements ICovidConfirmedDataService {
 
     }
 
-    @Override
-    public List<CountryConfirmedStats> getAllCountriesConfirmedCases() {
-        return repository.findAll();
-    }
-
-    @Override
-    public Optional<CountryConfirmedStats> getCountryConfirmedCases(String slug) {
-        Optional<CountryConfirmedStats> existing = repository.findBySlug(slug);
-        if (!existing.isPresent()) throw new CountryNotFoundException("Country " + slug + " not found.");
-        return existing;
-    }
-
-    @Scheduled(cron = "0 1 0 * * *") //Run the methode below avec 1:00 am
+    @Scheduled(cron = "0 1 0 * * *") //Runs the methode below avec 1:00 am
     @PostConstruct
     private void constructCountryConfirmedStatsAndSaveToDataBase() throws IOException, InterruptedException {
 
@@ -167,10 +168,30 @@ public class CovidConfirmedDataService implements ICovidConfirmedDataService {
                 }
             }
 
+            //todo save finalCountryConfirmedStats in file
+
             repository.save(finalCountryConfirmedStats);
         }
 
 
     }
+
+    @Override
+    public List<CountryConfirmedStats> getAllCountriesConfirmedStats() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Optional<CountryConfirmedStats> getCountryConfirmedStatsBySlug(String slug) {
+        Assert.hasLength(slug, "The slug must not be null or empty!");
+        Optional<CountryConfirmedStats> existing = repository.findBySlug(slug);
+        if (!existing.isPresent()) throw new CountryNotFoundException("Country " + slug + " not found.");
+        return existing;
+    }
+
+    //todo implements getFallbackAllCountriesConfirmedStats with hystrix. hint :: get data from file
+
+    //todo implements getFallbackCountryConfirmedStatsBySlug with hystrix :: get data from file
+
 
 }
