@@ -1,9 +1,7 @@
 package io.kagboton.covidtracker.coviddeathsservice.services;
 
-import io.kagboton.covidtracker.coviddeathsservice.models.Country;
 import io.kagboton.covidtracker.coviddeathsservice.models.CountryDeathsStats;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 

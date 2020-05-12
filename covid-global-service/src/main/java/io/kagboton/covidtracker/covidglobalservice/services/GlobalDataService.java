@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class GlobalDataService {
+public class GlobalDataService implements IGlobalDataService {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -23,18 +23,19 @@ public class GlobalDataService {
     @Autowired
     private CountryGlobalStatsRepository repository;
 
-    //Recover existing country global stats
+    @Override
     public List<CountryGlobalStats> getAllCountryGlobalStats(){
         return repository.findAll();
     }
 
+    @Override
     public Optional<CountryGlobalStats> getCountryGlobalStats(String slug){
         Optional<CountryGlobalStats> existing = repository.findBySlug(slug);
         if (!existing.isPresent()) throw new CountryNotFoundException("Country " + slug + " not found.");
         return existing;
     }
 
-    public void updateCountryGlobalStats(CountryGlobalStats countryGlobalStats){
+    private void updateCountryGlobalStats(CountryGlobalStats countryGlobalStats){
         List<CountryGlobalStats> existing = repository.findAll();
         for (CountryGlobalStats c : existing) {
             if (c.getSlug().equals(countryGlobalStats.getSlug())){
@@ -51,12 +52,12 @@ public class GlobalDataService {
 
     @Scheduled(cron = "0 1 0 * * *")
     @EventListener(ApplicationReadyEvent.class)
-    public void constructCountryGlobalStatsFromConfirmedDeathsAndRecoveredData(){
+    private void constructCountryGlobalStatsFromConfirmedDeathsAndRecoveredData(){
 
         //Get all stats from confirmed, deaths and recovered micro services
-        GlobalConfirmedStats globalConfirmedStats = restTemplate.getForObject("http://covid-confirmed-service/covid/confirmed", GlobalConfirmedStats.class);
-        GlobalDeathsStats globalDeathsStats = restTemplate.getForObject("http://covid-deaths-service/covid/deaths", GlobalDeathsStats.class);
-        GlobalRecoveredStats globalRecoveredStats = restTemplate.getForObject("http://covid-recovered-service/covid/recovered", GlobalRecoveredStats.class);
+        GlobalConfirmedStats globalConfirmedStats = restTemplate.getForObject("http://covid-confirmed-service/covid/confirmed/", GlobalConfirmedStats.class);
+        GlobalDeathsStats globalDeathsStats = restTemplate.getForObject("http://covid-deaths-service/covid/deaths/", GlobalDeathsStats.class);
+        GlobalRecoveredStats globalRecoveredStats = restTemplate.getForObject("http://covid-recovered-service/covid/recovered/", GlobalRecoveredStats.class);
 
         int confirmedListSize = globalConfirmedStats.getGlobalConfirmedStats().size();
         int deathsListSize = globalDeathsStats.getGlobalDeathsStats().size();
