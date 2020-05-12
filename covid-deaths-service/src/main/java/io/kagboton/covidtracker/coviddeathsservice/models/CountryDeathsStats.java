@@ -1,13 +1,27 @@
 package io.kagboton.covidtracker.coviddeathsservice.models;
 
-public class CountryDeathsStats {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-    String country;
+@Entity
+public class CountryDeathsStats implements Serializable {
+
+    @Id
     String slug;
+    String country;
     int totalDeaths;
     int newDeaths;
 
     public CountryDeathsStats() {
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public String getSlug() {
+        return slug;
     }
 
     public String getCountry() {
@@ -34,11 +48,4 @@ public class CountryDeathsStats {
         this.newDeaths = newDeaths;
     }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
 }

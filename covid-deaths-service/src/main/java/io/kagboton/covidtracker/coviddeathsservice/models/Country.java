@@ -3,6 +3,7 @@ package io.kagboton.covidtracker.coviddeathsservice.models;
 import java.util.Comparator;
 
 public class Country {
+
     String country;
     String slug;
 
