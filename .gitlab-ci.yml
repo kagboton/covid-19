@@ -71,6 +71,6 @@ package_job:
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
-  image: openjdk:8-alpine
+  image: openjdk
   before_script:
     - chmod +x mvnw
