@@ -1,3 +1,6 @@
-spring.application.name=covid-deaths-service
-server.port=8082
-
+spring:
+  application:
+    name: covid-deaths-service
+  cloud:
+    config:
+      uri: http://config-server:8888

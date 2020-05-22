@@ -138,7 +138,7 @@ public class ConfirmedStatsService implements IConfirmedStatsService {
 
     }
 
-    @Scheduled(cron = "0 1 0 * * *") //Runs the methode below avec 1:00 am
+    @Scheduled(cron = "0 0 1 * * *") //Runs the methode below avec 1:00 am
     @PostConstruct
     private void constructCountryConfirmedStatsAndSaveToDataBase() throws IOException, InterruptedException {
 

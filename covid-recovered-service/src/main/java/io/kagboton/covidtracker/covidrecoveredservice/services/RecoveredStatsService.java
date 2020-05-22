@@ -136,7 +136,7 @@ public class RecoveredStatsService implements IRecoveredStatsService {
         return tempCountryRecoveredStatsList;
     }
 
-    @Scheduled(cron = "0 1 0 * * *") //Runs the methode below avec 1:00 am
+    @Scheduled(cron = "0 0 1 * * *") //Runs the methode below avec 1:00 am
     @PostConstruct
     private void constructCountryRecoveredStatsAndSaveToDataBase() throws IOException, InterruptedException {
 

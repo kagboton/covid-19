@@ -50,7 +50,7 @@ public class GlobalDataService implements IGlobalDataService {
         }
     }
 
-    @Scheduled(cron = "0 1 0 * * *")
+    @Scheduled(cron = "0 0 2 * * *")
     @EventListener(ApplicationReadyEvent.class)
     private void constructCountryGlobalStatsFromConfirmedDeathsAndRecoveredData(){
 
