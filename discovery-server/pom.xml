@@ -5,6 +5,7 @@
 
     <groupId>io.kagboton</groupId>
     <artifactId>discovery-server</artifactId>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>discovery-server</name>
     <description>Eureka Discovery Server</description>
@@ -17,8 +18,6 @@
 
 
     <properties>
-        <java.version>11</java.version>
-        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <docker.image.exposed.port>8761</docker.image.exposed.port>
         <docker.image.dockerfile.dir>${basedir}/../docker</docker.image.dockerfile.dir>
     </properties>
@@ -94,6 +93,5 @@
             </build>
         </profile>
     </profiles>
-
 
 </project>
