@@ -19,7 +19,7 @@ build_job:
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
-  image: openjdk:12-alpine
+  image: openjdk:8-alpine
   before_script:
     - chmod +x mvnw
 
@@ -33,7 +33,7 @@ test_job:
       -Dorg.slf4j.simpleLogger.showDateTime=true
       -Djava.awt.headless=true
       --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
-  image: openjdk:12-alpine
+  image: openjdk:8-alpine
   before_script:
     - chmod +x mvnw
 
