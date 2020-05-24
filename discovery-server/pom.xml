@@ -5,7 +5,6 @@
 
     <groupId>io.kagboton</groupId>
     <artifactId>discovery-server</artifactId>
-    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>discovery-server</name>
     <description>Eureka Discovery Server</description>
@@ -79,20 +78,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>buildDocker</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>docker-maven-plugin</artifactId>
-                        <version>1.2.2</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
+    
 </project>
