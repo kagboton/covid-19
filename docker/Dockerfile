@@ -1,4 +1,4 @@
-FROM openjdk:12-jre-alpine
+FROM openjdk:12-jdk-alpine
 VOLUME /tmp
 
 # Download dockerize and cache that layer
