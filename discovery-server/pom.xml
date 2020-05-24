@@ -17,8 +17,6 @@
 
     <properties>
         <java.version>11</java.version>
-        <docker.image.exposed.port>8761</docker.image.exposed.port>
-        <docker.image.dockerfile.dir>${basedir}/../docker</docker.image.dockerfile.dir>
     </properties>
 
     <dependencies>
@@ -78,5 +76,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
