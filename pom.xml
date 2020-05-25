@@ -76,7 +76,7 @@
             <activation>
                 <file>
                     <!-- Just a way to identify a Spring Boot application -->
-                    <exists>src/main/resources/bootstrap.yml</exists>
+                    <exists>src/main/resources/application.yml</exists>
                 </file>
             </activation>
             <build>
