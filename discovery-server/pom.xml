@@ -5,9 +5,8 @@
 
     <groupId>io.kagboton</groupId>
     <artifactId>discovery-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>discovery-server</name>
-    <description>Eureka Discovery Server</description>
+    <packaging>jar</packaging>
+    <description>Covid-19 Discovery Server</description>
 
     <parent>
         <groupId>io.kagboton.covidtracker</groupId>
@@ -73,5 +72,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>
